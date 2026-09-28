@@ -17,9 +17,26 @@ namespace ConsoleApp6
             _name = name;
             _memberships = new List<Membership>();
         }
-        public void AddMembership()
+        public void AddMembership(Membership membership)
         {
-            _membership._Aűúűqg
+            _memberships.Add(membership);
+        }
+        public int TotalIncome()
+        {
+            int total = 0;
+            foreach (Membership membership in _memberships)
+            {
+                total += membership.TotalCost();
+            }
+            return total;
+        }
+        public Member MostActive()
+        {
+            return _memberships.OrderByDescending(x => x.Owner.Visits).Select(x => x.Owner).First();
+        }
+        public Membership BestValue()
+        {
+            return _memberships.OrderBy(x => x.PricePerVisit()).First();
         }
     }
 }

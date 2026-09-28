@@ -1,4 +1,6 @@
-﻿namespace ConsoleApp6
+﻿using System.Net.Http.Headers;
+
+namespace ConsoleApp6
 {
     internal class Program
     {
@@ -25,7 +27,7 @@
             Console.WriteLine(member2.Describe());
             Console.WriteLine(member3.Describe());
             Membership ship1 = new Membership(member1, 50, 3);
-            Membership ship2 = new Membership(member2, 66, 6);
+            Membership ship2 = new Membership(member3, 66, 6);
             Console.WriteLine($"Total cost for {ship1.Owner.Describe()} is {ship1.TotalCost()}");
             Console.WriteLine($"Total cost for {ship2.Owner.Describe()} is {ship2.TotalCost()}");
             ship1.Extend(5);
@@ -33,7 +35,16 @@
             Console.WriteLine($"Total cost for {ship2.Owner.Describe()} is {ship2.TotalCost()}");
             Console.WriteLine($"Price / Visit for {ship1.Owner.Describe()} is {ship1.PricePerVisit()}");
             Console.WriteLine($"Price / Visit for {ship2.Owner.Describe()} is {ship2.PricePerVisit()}");
-
+            Gym gym = new Gym("The big one");
+            gym.AddMembership(ship1);
+            gym.AddMembership(ship2);
+            Membership ship3 = new Membership(member2,15, 2);
+            Membership ship4 = new Membership(new Member("Hairy Porter", 24, false), 10, 1);
+            gym.AddMembership(ship3);
+            gym.AddMembership(ship4);
+            Console.WriteLine($"Total income: {gym.TotalIncome()}");
+            Console.WriteLine($"Most active member: {gym.MostActive().Describe()}");
+            Console.WriteLine($"Best value: {gym.BestValue().Owner.Name}, price / visit: {gym.BestValue().PricePerVisit()}");
         }
     }
 }
