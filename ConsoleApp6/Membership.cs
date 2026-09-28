@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication.ExtendedProtection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -21,13 +22,21 @@ namespace ConsoleApp6
             _monthlyPrice = monthlyPrice;
             _months = months;
         }
-        public double TotalCost()
+        public int TotalCost()
         {
             if (_owner.IsStudent)
             {
-                return _monthlyPrice * 0.2 * _months;
+                return (int)(double.Round(_monthlyPrice * 0.8 * _months));
             }
             return MonthlyPrice * Months;
+        }
+        public void Extend(int months)
+        {
+            _months += months;
+        }
+        public int PricePerVisit()
+        {
+            return _owner.Visits == 0 ? TotalCost() : (int)(double.Round(TotalCost() / _owner.Visits));
         }
 
     }
