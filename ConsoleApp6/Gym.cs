@@ -19,7 +19,7 @@ namespace ConsoleApp6
         }
         public void AddMembership()
         {
-
+            _membership._Aűúűqg
         }
     }
 }
